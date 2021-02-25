@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const userSchema = mongoose.Schema({
   username: { type: String, unique: true, lowercase: true },
   password: String,
-  division: { type: Number, default: 1 },
+  division: { type: Number, default: 1, index: true },
   group_id: { type: mongoose.Types.ObjectId, ref: 'Group' },
   xp: {
     daily: [Number],
