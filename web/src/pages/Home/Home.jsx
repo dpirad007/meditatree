@@ -1,12 +1,9 @@
-import React, { Fragment, Suspense } from "react";
+import React, { Fragment, Suspense, useEffect } from 'react';
 
-import { Canvas } from "react-three-fiber";
+import { Canvas } from 'react-three-fiber';
+import { useFBX, OrbitControls } from '@react-three/drei';
 
-import { useFBX, OrbitControls } from "@react-three/drei";
-
-// const Forest =  require("../../../public/main_level.fbx")
-
-import "./Home.css";
+import './Home.css';
 
 const Lights = () => {
   return (
@@ -25,25 +22,37 @@ function Model({ modelPath }) {
 }
 
 const Home = () => {
+  // import useSWR from 'swr';
+  // import easyFetch from '../../utils/easyFetch';
+  // const { data } = useSWR('user/streak');
+  // console.log(data);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const { data, error } = await easyFetch('user/xp', { xp: 10 }, 'PUT');
+  //     console.log(data);
+  //   })();
+  // }, []);
+
   return (
-    <div className="home-main">
+    <div className='home-main'>
       <Canvas
         colorManagement
         camera={{ position: [0, 100, 0], fov: 70 }}
-        style={{ height: "100vh" }}
+        style={{ height: '100vh' }}
       >
         <Lights />
         <Suspense fallback={null}>
           <group position={[0, 250, 0]}>
             <mesh
               scale={[0.01, 0.01, 0.01]}
-              onClick={(e) => {
+              onClick={e => {
                 e.stopPropagation();
-                console.log("yolo");
+                console.log('yolo');
               }}
               position={[0, -250, 0]}
             >
-              <Model modelPath="/main_level.fbx" />
+              <Model modelPath='/main_level.fbx' />
             </mesh>
           </group>
         </Suspense>

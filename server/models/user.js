@@ -5,17 +5,7 @@ const userSchema = mongoose.Schema({
   password: String,
   division: { type: Number, default: 1, index: true },
   group_id: { type: mongoose.Types.ObjectId, ref: 'Group' },
-  xp: {
-    daily: [Number],
-    weekly: {
-      type: Number,
-      default: 0,
-    },
-    total: {
-      type: Number,
-      default: 0,
-    },
-  },
+  xp: Number,
   streak: {
     last_session: {
       type: Date,

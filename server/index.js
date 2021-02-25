@@ -7,6 +7,7 @@ const MongoStore = require('connect-mongo').default;
 require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 
 const clientURL = process.env.CLIENT_URL || 'http://localhost:3000',
   port = process.env.PORT || 4000,
@@ -51,6 +52,7 @@ app.use(
 require('./models/user.js');
 
 app.use('/auth', authRoutes);
+app.use('/user', userRoutes);
 
 app.listen(port, () => {
   console.log(`🚀 Up at http://localhost:${port}`);

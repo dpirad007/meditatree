@@ -1,6 +1,6 @@
 import { API_URI } from './constants';
 
-export default async function easyFetch(path, data = {}, method = 'POST') {
+const easyFetch = async (path, data = {}, method = 'POST') => {
   try {
     const response = await fetch(API_URI + path, {
       headers: {
@@ -18,4 +18,6 @@ export default async function easyFetch(path, data = {}, method = 'POST') {
       error,
     };
   }
-}
+};
+
+export default easyFetch;
