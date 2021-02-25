@@ -1,0 +1,41 @@
+
+header .header-inner {
+  padding: 2rem;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header .header-inner .logo {
+  font-weight: 600;
+  font-size: larger;
+  letter-spacing: 2px;
+  color: #fff;
+}
+
+header .header-inner .logo a{
+  text-decoration: none;
+  color: white;
+}
+header .header-inner nav ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+header .header-inner nav ul li {
+  list-style: none;
+  margin: 0 1rem;
+}
+header .header-inner nav ul li.btn a {
+  color: #fff;
+  font-weight: 600;
+  background: #23232a;
+  padding: 16px 24px;
+  border-radius: 10px;
+}
+header .header-inner nav ul li a {
+  text-transform: capitalize;
+  text-decoration: none;
+  color: #fff;
+}
