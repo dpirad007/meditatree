@@ -4,8 +4,6 @@ import { Canvas } from "react-three-fiber";
 
 import { useFBX, OrbitControls } from "@react-three/drei";
 
-import Navbar from "../../components/Navbar/Navbar";
-
 // const Forest =  require("../../../public/main_level.fbx")
 
 import "./Home.css";
