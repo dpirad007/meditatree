@@ -1,7 +1,5 @@
 import React from "react";
 
-import backsong from "../../music/backsong.mp3";
-
 import Particle from "../../components/Particle/Particle";
 
 import "./Home.css";
@@ -19,7 +17,6 @@ const Home = () => {
         Hello
       </h1>
       <Particle />
-      <embed src={backsong} loop={true} autostart={true} hidden={true} />
     </div>
   );
 };
