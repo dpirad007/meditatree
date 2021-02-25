@@ -11,7 +11,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 0.5rem;
-  box-shadow: 0.5rem 0.5rem 0.5rem 0.5rem #EEE;
+  background-color: white;
 }
 
 .login_or_register > h1 {
@@ -37,10 +37,11 @@
 }
 
 .input_fields > label > input {
-  height: 1.5rem;
+  font-size: 1rem;
   margin-bottom: 0.5rem;
-  padding: 0.25rem;
-
+  padding: 0.5rem 1rem;
+  border: 1px solid grey;
+  border-radius: 0.25rem;
   outline-color: var(--green);
 }
 
