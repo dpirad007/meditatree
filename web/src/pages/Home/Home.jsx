@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense } from "react";
+import React, { Fragment, Suspense, useState } from "react";
 
 import { Canvas } from "react-three-fiber";
 
@@ -39,6 +39,7 @@ function Model({ modelPath }) {
 }
 
 const Home = () => {
+  const [hover, setHover] = useState(false);
   return (
     <div className="home-main">
       <Navbar />
@@ -50,7 +51,16 @@ const Home = () => {
         <Lights />
         <Suspense fallback={null}>
           <group position={[0, 250, 0]}>
-            <mesh position={[0, -250, 0]} scale={[10, 10, 10]}>
+            <mesh
+              scale={hover ? [11, 11, 11] : [10, 10, 10]}
+              onPointerOver={(e) => setHover(true)}
+              onPointerOut={(e) => setHover(false)}
+              onClick={(e) => {
+                e.stopPropagation();
+                console.log("yolo");
+              }}
+              position={[0, -250, 0]}
+            >
               <Model modelPath="/flower_white.gltf" />
             </mesh>
           </group>
