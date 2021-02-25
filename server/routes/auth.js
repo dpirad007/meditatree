@@ -24,21 +24,23 @@ router.post('/register', async (req, res) => {
     });
     await user.save();
 
-    req.session.username = doc.username;
+    req.session.username = user.username;
     req.session.save(err => {
       if (err) throw err;
     });
     res.send({
-      data: { username: doc.username },
+      data: { username: user.username },
       error: null,
     });
-  } catch (err) {
+  } catch (error) {
     console.error(error);
     res.send({ data: null, error: 'unknown error occurred' });
   }
 });
 
 router.post('/login', async (req, res) => {
+  console.log(req.body);
+
   try {
     const { username, password } = req.body;
 
