@@ -1,45 +1,22 @@
 import React from "react";
-import Particles from "react-particles-js";
+
+import Particle from "../../components/Particle/Particle";
+
+import "./Home.css";
 
 const Home = () => {
   return (
     <div>
-      <Particles
-        params={{
-          particles: {
-            number: {
-              value: 400,
-              density: {
-                enable: true,
-                value_area: 1000,
-              },
-            },
-            color: {
-              value: "#61dafb",
-            },
-            opacity: {
-              value: 0.5,
-              anim: {
-                enable: true,
-              },
-            },
-            size: {
-              value: 7,
-              random: true,
-              anim: {
-                enable: true,
-                speed: 3,
-              },
-            },
-            line_linked: {
-              enable: false,
-            },
-            move: {
-              speed: 0.2,
-            },
-          },
+      <h1
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
         }}
-      />
+      >
+        Hello
+      </h1>
+      <Particle />
     </div>
   );
 };
