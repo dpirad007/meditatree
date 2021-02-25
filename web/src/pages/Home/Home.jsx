@@ -1,13 +1,43 @@
-import React, { Fragment, Suspense } from 'react';
+import React, { Fragment, Suspense, useState, useRef } from "react";
 
-import { Canvas } from 'react-three-fiber';
-import { useFBX, OrbitControls, Loader } from '@react-three/drei';
+import { Canvas, useFrame } from "react-three-fiber";
+import { useFBX, OrbitControls, Loader, Html } from "@react-three/drei";
 
-import Navbar from '../../components/Navbar/Navbar';
+import Navbar from "../../components/Navbar/Navbar";
 // import useSWR from 'swr';
 // import easyFetch from '../../utils/easyFetch';
 
-import './Home.css';
+import "./Home.css";
+
+function Box(props) {
+  // This reference will give us direct access to the mesh
+  const mesh = useRef();
+  // Set up state for the hovered and active state
+  const [hovered, setHover] = useState(false);
+  const [active, setActive] = useState(false);
+  // Rotate mesh every frame, this is outside of React without overhead
+  useFrame(() => {
+    mesh.current.rotation.y += 0.005;
+  });
+  return (
+    <mesh
+      {...props}
+      ref={mesh}
+      scale={active ? [2.3, 2.3, 2.3] : [2, 2, 2]}
+      onClick={(e) => setActive(!active)}
+      onPointerOver={(e) => setHover(true)}
+      onPointerOut={(e) => setHover(false)}
+    >
+      <boxBufferGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color={hovered ? "#ffee93" : "orange"} />
+      <Html>
+        <div className="box-container">
+          <div className="box-text">{props.text}</div>
+        </div>
+      </Html>
+    </mesh>
+  );
+}
 
 const Lights = () => {
   return (
@@ -38,31 +68,44 @@ const Home = () => {
   // }, []);
 
   return (
-    <div className='home-main'>
+    <div className="home-main">
       <Navbar />
       <Canvas
         colorManagement
         camera={{ position: [3, 3, 3], fov: 65 }}
-        style={{ height: '100vh' }}
+        style={{ height: "10vh" }}
+      >
+        <ambientLight intensity={0.5} />
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+        <pointLight position={[-10, -10, -10]} />
+        <Box position={[-3, 0, 1]} text="Guided" />
+        <Box position={[3, 0, 1]} text="Unguided" />
+
+        <OrbitControls minAzimuthAngle={0} maxAzimuthAngle={0} />
+      </Canvas>
+      <Canvas
+        colorManagement
+        camera={{ position: [3, 3, 3], fov: 65 }}
+        style={{ height: "90vh" }}
       >
         <Lights />
         <Suspense fallback={null}>
           <group position={[0, 250, 0]}>
             <mesh
               scale={[0.001, 0.001, 0.001]}
-              onClick={e => {
+              onClick={(e) => {
                 e.stopPropagation();
-                console.log('yolo');
+                console.log("yolo");
               }}
               position={[0, -250, 0]}
             >
-              <Model modelPath='/main_level.fbx' />
+              <Model modelPath="/main_level.fbx" />
             </mesh>
           </group>
         </Suspense>
         <OrbitControls
           enableZoom={false}
-          mixPolarAngle={Math.PI / 2.1}
+          minPolarAngle={Math.PI / 2.5}
           maxPolarAngle={Math.PI / 2.1}
         />
       </Canvas>

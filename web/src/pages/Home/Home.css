@@ -45,3 +45,17 @@
     align-items: center;
     justify-content: center;
   } */
+
+.box-container{
+ position: relative;
+}
+
+.box-text{
+  position: absolute;
+  top: 0;
+  font-size: small;
+  text-align: center;
+  color: white;
+  font-weight: 400;
+
+}

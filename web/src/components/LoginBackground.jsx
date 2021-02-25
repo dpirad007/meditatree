@@ -1,9 +1,9 @@
-import React, { Suspense } from 'react';
+import React, { Suspense } from "react";
 
-import { Canvas } from 'react-three-fiber';
-import { OrbitControls, useFBX } from '@react-three/drei';
+import { Canvas } from "react-three-fiber";
+import { OrbitControls, useFBX } from "@react-three/drei";
 
-import { PUBLIC } from '../utils/constants';
+import { PUBLIC } from "../utils/constants";
 
 function Model({ modelPath }) {
   const fbx = useFBX(modelPath);
@@ -15,14 +15,18 @@ const LoginBackground = () => (
     shadowMap
     colorManagement
     camera={{ position: [3, 3, 3], fov: 65 }}
-    style={{ height: '100vh' }}
+    style={{ height: "100vh" }}
   >
-    <ambientLight intensity={0.2} />
-    <directionalLight castShadow position={[5, 2, 8]} intensity={0.2} />
+    <ambientLight intensity={0.3} />
+    <directionalLight position={[-10, 10, 0]} intensity={0.1} />
+    <directionalLight castShadow position={[0, 10, 0]} intensity={0.1} />
+    <directionalLight castShadow position={[100, 10, 0]} intensity={0.1} />
+    {/*<ambientLight intensity={0.2} />
+<directionalLight castShadow position={[5, 2, 8]} intensity={0.2} />*/}
     <Suspense fallback={null}>
       <group
         position={[0, 0, 0]}
-        onClick={e => {
+        onClick={(e) => {
           console.log(e);
         }}
       >
@@ -36,7 +40,11 @@ const LoginBackground = () => (
         </mesh>
       </group>
     </Suspense>
-    <OrbitControls autoRotate />
+    <OrbitControls
+      autoRotate
+      mixPolarAngle={Math.PI / 2.1}
+      maxPolarAngle={Math.PI / 2.1}
+    />
   </Canvas>
 );
 
