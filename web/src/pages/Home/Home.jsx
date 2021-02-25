@@ -1,8 +1,10 @@
-import React, { Fragment, Suspense, useRef } from "react";
+import React, { Fragment, Suspense, useRef, useEffect } from "react";
 
 import { Canvas, extend, useFrame, useThree } from "react-three-fiber";
 
 import { Html, useGLTF } from "@react-three/drei";
+
+import state from "../../components/State";
 
 import { Section } from "../../components/Section";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -45,23 +47,24 @@ const Lights = () => {
   );
 };
 
-function Model() {
-  const gltf = useGLTF("/armchairYellow.gltf");
+function Model({ modelPath }) {
+  const gltf = useGLTF(modelPath);
   return <primitive object={gltf.scene} dispose={null} />;
 }
 
-const HTMLContent = () => {
+const HTMLContent = ({ domContent, positionY, modelPath }) => {
   const ref = useRef();
 
   return (
     <Section factor={1.5} offset={1}>
-      <group position={[0, 250, 0]}>
+      <group position={[0, positionY, 0]}>
         <mesh ref={ref} position={[0, -35, 0]}>
-          <Model />
+          <Model modelPath={modelPath} />
         </mesh>
-        <Html fullscreen>
+        <Html portal={domContent} fullscreen>
           <div className="container">
             <h1>Hello</h1>
+            <button>yo</button>
           </div>
         </Html>
       </group>
@@ -70,6 +73,10 @@ const HTMLContent = () => {
 };
 
 const Home = () => {
+  const domContent = useRef();
+  const scrollArea = useRef();
+  const onScroll = (e) => (state.top.current = e.target.scrollTop);
+  useEffect(() => void onScroll({ target: scrollArea.current }), []);
   return (
     <Fragment>
       <Canvas
@@ -80,9 +87,22 @@ const Home = () => {
         <CameraControls />
         <Lights />
         <Suspense fallback={null}>
-          <HTMLContent />
+          <HTMLContent
+            modelPath="/armchairYellow.gltf"
+            positionY={250}
+            domContent={domContent}
+          />
+          <HTMLContent
+            modelPath="/armchairGreen.gltf"
+            positionY={0}
+            domContent={domContent}
+          />
         </Suspense>
       </Canvas>
+      <div className="scrollArea" ref={scrollArea} onScroll={onScroll}>
+        <div style={{ position: "sticky", top: 0 }} ref={domContent} />
+        <div style={{ height: `${state.pages * 100}vh` }} />
+      </div>
     </Fragment>
   );
 };
