@@ -14,7 +14,6 @@ const Lights = () => {
   return (
     <Fragment>
       <ambientLight intensity={0.3} />
-
       <directionalLight position={[-10, 10, 0]} intensity={0.1} />
       <directionalLight castShadow position={[0, 10, 0]} intensity={0.1} />
       <directionalLight castShadow position={[100, 10, 0]} intensity={0.1} />
@@ -30,7 +29,6 @@ function Model({ modelPath }) {
 const Home = () => {
   return (
     <div className="home-main">
-      <Navbar />
       <Canvas
         colorManagement
         camera={{ position: [0, 100, 0], fov: 70 }}

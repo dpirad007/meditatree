@@ -39,7 +39,6 @@ function Model({ modelPath }) {
 const LeaderBoard = () => {
   return (
     <div className="leaderboard-main">
-      <Navbar />
       <Canvas
         colorManagement
         camera={{ position: [0, 0, 120], fov: 70 }}
