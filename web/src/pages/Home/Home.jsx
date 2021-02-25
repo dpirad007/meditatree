@@ -1,12 +1,12 @@
-import React, { Fragment, Suspense, useRef, useEffect } from "react";
+import React, { Fragment, Suspense } from "react";
 
-import { Canvas, useFrame } from "react-three-fiber";
+import { Canvas } from "react-three-fiber";
 
-import { Html, useGLTF, OrbitControls } from "@react-three/drei";
-
-import state from "../../components/State";
+import { useGLTF, OrbitControls } from "@react-three/drei";
 
 import { Section } from "../../components/Section";
+
+import Navbar from "../../components/Navbar/Navbar";
 
 import "./Home.css";
 
@@ -38,35 +38,10 @@ function Model({ modelPath }) {
   return <primitive object={gltf.scene} dispose={null} />;
 }
 
-// const HTMLContent = ({ domContent, positionY, modelPath, flower }) => {
-//   const ref = useRef();
-
-//   useFrame(() => (ref.current.rotation.y += 0.001));
-
-//   return (
-//     <Section factor={1.5} offset={1}>
-//       <group position={[0, positionY, 0]}>
-//         <mesh
-//           ref={ref}
-//           position={[0, -35, 0]}
-//           scale={flower ? [10, 10, 10] : [1, 1, 1]}
-//         >
-//           <Model modelPath="/flower_white.gltf" />
-//         </mesh>
-//         <Html portal={domContent} fullscreen>
-//           <div className="container">
-//             <h1>Hello</h1>
-//             <button>yo</button>
-//           </div>
-//         </Html>
-//       </group>
-//     </Section>
-//   );
-// };
-
 const Home = () => {
   return (
     <Fragment>
+      <Navbar />
       <Canvas
         colorManagement
         camera={{ position: [0, 0, 120], fov: 70 }}
@@ -75,8 +50,8 @@ const Home = () => {
         <Lights />
         <Suspense fallback={null}>
           <group position={[0, 250, 0]}>
-            <mesh position={[0, -280, 0]} scale={[1, 1, 1]}>
-              <Model modelPath="/armchairGreen.gltf" />
+            <mesh position={[0, -250, 0]} scale={[10, 10, 10]}>
+              <Model modelPath="/flower_white.gltf" />
             </mesh>
           </group>
         </Suspense>
@@ -86,18 +61,21 @@ const Home = () => {
           maxPolarAngle={Math.PI / 2}
         />
       </Canvas>
+
       <Canvas
         colorManagement
         camera={{ position: [0, 0, 120], fov: 70 }}
-        style={{ height: "100vh" }}
+        style={{ height: "50vh" }}
       >
         <Lights />
         <Suspense fallback={null}>
-          <group position={[0, 250, 0]}>
-            <mesh position={[0, -280, 0]} scale={[1, 1, 1]}>
-              <Model modelPath="/armchairYellow.gltf" />
-            </mesh>
-          </group>
+          <Section factor={1.5} offset={1}>
+            <group position={[0, 250, 0]}>
+              <mesh position={[0, -280, 0]} scale={[1, 1, 1]}>
+                <Model modelPath="/armchairYellow.gltf" />
+              </mesh>
+            </group>
+          </Section>
         </Suspense>
         <OrbitControls
           enableZoom={false}
