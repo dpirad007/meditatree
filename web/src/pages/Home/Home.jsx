@@ -4,6 +4,8 @@ import { Canvas } from 'react-three-fiber';
 import { useFBX, OrbitControls, Loader } from '@react-three/drei';
 
 import Navbar from '../../components/Navbar/Navbar';
+// import useSWR from 'swr';
+// import easyFetch from '../../utils/easyFetch';
 
 import './Home.css';
 
@@ -24,11 +26,10 @@ function Model({ modelPath }) {
 }
 
 const Home = () => {
-  // import useSWR from 'swr';
-  // import easyFetch from '../../utils/easyFetch';
-  // const { data } = useSWR('user/streak');
+  // const { data, error } = useSWR('user/leaderboard');
   // console.log(data);
-
+  // const { data, error } = useSWR('user/streak');
+  // console.log(data);
   // useEffect(() => {
   //   (async () => {
   //     const { data, error } = await easyFetch('user/xp', { xp: 10 }, 'PUT');

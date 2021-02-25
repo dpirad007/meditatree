@@ -5,7 +5,10 @@ const userSchema = mongoose.Schema({
   password: String,
   division: { type: Number, default: 1, index: true },
   group_id: { type: mongoose.Types.ObjectId, ref: 'Group' },
-  xp: Number,
+  xp: {
+    type: Number,
+    default: 0,
+  },
   streak: {
     last_session: {
       type: Date,
@@ -15,6 +18,10 @@ const userSchema = mongoose.Schema({
       type: Number,
       default: 0,
     },
+  },
+  days: {
+    type: Map,
+    of: Boolean,
   },
   next_tutorial: {
     type: Number,

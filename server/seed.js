@@ -43,7 +43,7 @@ const createGroups = async () => {
 
       await Promise.all(
         users.map(async id => {
-          await User.findByIdAndUpdate(id, { group_id: group.id });
+          await User.findByIdAndUpdate(id, { group_id: group._id });
         })
       );
       console.log('Groups linked');
