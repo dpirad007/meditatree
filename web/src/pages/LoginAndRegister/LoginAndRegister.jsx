@@ -36,7 +36,7 @@ const Login = ({ form, setForm }) => {
 const Register = ({ form, setForm }) => {
   return (
     <>
-      <h1>legister</h1>
+      <h1>register</h1>
       <div className='input_fields'>
         <label>
           <span>username</span>
