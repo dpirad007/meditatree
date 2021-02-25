@@ -1,0 +1,19 @@
+{
+  "name": "meditatree-server",
+  "version": "0.1.0",
+  "description": "The backend for meditatree",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArchitBhonsle/meditatree.git"
+  },
+  "author": "Archit Bhonsle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArchitBhonsle/meditatree/issues"
+  },
+  "homepage": "https://github.com/ArchitBhonsle/meditatree#readme"
+}
