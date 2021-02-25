@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo').default;
 require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
@@ -40,8 +40,8 @@ app.use(
       sameSite: 'lax',
       maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
     },
-    store: new MongoStore({
-      mongooseConnection: mongoose.connection,
+    store: MongoStore.create({
+      mongoUrl: mongoURL,
     }),
   })
 );
