@@ -26,6 +26,10 @@ const userSchema = mongoose.Schema({
       default: 0,
     },
   },
+  next_tutorial: {
+    type: Number,
+    default: 1,
+  },
 });
 
 const Admin = mongoose.model('User', userSchema);
