@@ -2,7 +2,7 @@ import React, { Fragment, Suspense } from "react";
 
 import { Canvas } from "react-three-fiber";
 
-import { useFBX, OrbitControls } from "@react-three/drei";
+import { useFBX, OrbitControls, Loader } from "@react-three/drei";
 
 import Navbar from "../../components/Navbar/Navbar";
 
@@ -54,6 +54,7 @@ const Home = () => {
           maxPolarAngle={Math.PI / 2.1}
         />
       </Canvas>
+      <Loader />
     </div>
   );
 };
