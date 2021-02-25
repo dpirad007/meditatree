@@ -1,4 +1,3 @@
-import './App.css';
 import FetchUser from './components/FetchUser';
 import { BrowserRouter } from 'react-router-dom';
 import { SWRConfig } from 'swr';
