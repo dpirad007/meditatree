@@ -4,7 +4,7 @@ import { Canvas } from "react-three-fiber";
 
 import { useFBX, OrbitControls } from "@react-three/drei";
 
-// const Forest =  require("../../../public/main_level.fbx")
+import Navbar from "../../components/Navbar/Navbar";
 
 import "./Home.css";
 
@@ -27,16 +27,17 @@ function Model({ modelPath }) {
 const Home = () => {
   return (
     <div className="home-main">
+      <Navbar />
       <Canvas
         colorManagement
-        camera={{ position: [0, 100, 0], fov: 70 }}
+        camera={{ position: [3, 3, 3], fov: 65 }}
         style={{ height: "100vh" }}
       >
         <Lights />
         <Suspense fallback={null}>
           <group position={[0, 250, 0]}>
             <mesh
-              scale={[0.01, 0.01, 0.01]}
+              scale={[0.001, 0.001, 0.001]}
               onClick={(e) => {
                 e.stopPropagation();
                 console.log("yolo");

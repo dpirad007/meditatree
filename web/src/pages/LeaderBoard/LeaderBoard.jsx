@@ -2,7 +2,9 @@ import React, { Fragment, Suspense } from "react";
 
 import { Canvas } from "react-three-fiber";
 
-import { useGLTF, OrbitControls } from "@react-three/drei";
+import { useGLTF, OrbitControls, Loader } from "@react-three/drei";
+
+import Navbar from "../../components/Navbar/Navbar";
 
 import "./LeaderBoard.css";
 
@@ -37,6 +39,7 @@ function Model({ modelPath }) {
 const LeaderBoard = () => {
   return (
     <div className="leaderboard-main">
+      <Navbar />
       <Canvas
         colorManagement
         camera={{ position: [0, 0, 120], fov: 70 }}
@@ -83,6 +86,7 @@ const LeaderBoard = () => {
           maxPolarAngle={Math.PI / 2}
         />
       </Canvas>
+      <Loader />
     </div>
   );
 };
