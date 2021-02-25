@@ -52,6 +52,7 @@ const Home = () => {
           </group>
         </Suspense>
         <OrbitControls
+          enableZoom={false}
           mixPolarAngle={Math.PI / 2.1}
           maxPolarAngle={Math.PI / 2.1}
         />
