@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import LoginBackground from '../../components/LoginBackground';
 import { useAuth } from '../../utils/AuthContext';
 
 import easyFetch from '../../utils/easyFetch';
-// import { PUBLIC } from '../../utils/constants';
+import { PUBLIC } from '../../utils/constants';
 
 import './LoginAndRegister.css';
 
@@ -70,8 +71,13 @@ const Register = ({ form, setForm }) => {
 };
 const LoginAndRegister = () => {
   const history = useHistory();
+  const audioRef = useRef();
 
   const { userData, userMutate } = useAuth();
+
+  useEffect(() => {
+    audioRef.current.volume = 0.1;
+  }, []);
 
   useEffect(() => {
     if (userData) {
@@ -97,38 +103,46 @@ const LoginAndRegister = () => {
   };
 
   return (
-    <div className='login_or_register'>
-      {loginOrRegister ? (
-        <Login form={form} setForm={setForm} />
-      ) : (
-        <Register form={form} setForm={setForm} />
-      )}
-      <div className='lor_buttons'>
-        <button className='inv' onClick={change}>
-          {loginOrRegister ? 'register' : 'login'}
-        </button>
-        <button
-          onClick={async () => {
-            const { data, error } = await easyFetch(
-              `auth/${loginOrRegister ? 'login' : 'register'}`,
-              form
-            );
-            if (error) {
-              console.log(error);
-              error.map(({ field, message }) =>
-                setErrors({ ...errors, [field]: message })
+    <>
+      <LoginBackground />
+      <div className='login_or_register'>
+        {loginOrRegister ? (
+          <Login form={form} setForm={setForm} />
+        ) : (
+          <Register form={form} setForm={setForm} />
+        )}
+        <div className='lor_buttons'>
+          <button className='inv' onClick={change}>
+            {loginOrRegister ? 'register' : 'login'}
+          </button>
+          <button
+            onClick={async () => {
+              const { data, error } = await easyFetch(
+                `auth/${loginOrRegister ? 'login' : 'register'}`,
+                form
               );
-            } else {
-              await userMutate(data, false);
-              history.push('/');
-            }
-          }}
-        >
-          {loginOrRegister ? 'login' : 'register'}
-        </button>
+              if (error) {
+                console.log(error);
+                error.map(({ field, message }) =>
+                  setErrors({ ...errors, [field]: message })
+                );
+              } else {
+                await userMutate(data, false);
+                history.push('/');
+              }
+            }}
+          >
+            {loginOrRegister ? 'login' : 'register'}
+          </button>
+        </div>
+        <audio
+          ref={audioRef}
+          src={`${PUBLIC}/music/backsong.mp3`}
+          loop
+          autoPlay
+        />
       </div>
-      {/* <audio src={`${PUBLIC}/music/backsong.mp3`} loop autoPlay /> */}
-    </div>
+    </>
   );
 };
 
