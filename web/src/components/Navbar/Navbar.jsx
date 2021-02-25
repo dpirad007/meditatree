@@ -6,7 +6,9 @@ export default function Header() {
   return (
     <header>
       <div className="header-inner">
-        <div className="logo">MediTree</div>
+        <div className="logo">
+          <a href="/">MediTree</a>
+        </div>
         <nav>
           <ul>
             <li>

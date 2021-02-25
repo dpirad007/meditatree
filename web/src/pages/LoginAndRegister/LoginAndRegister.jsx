@@ -1,31 +1,31 @@
-import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useAuth } from '../../utils/AuthContext';
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../../utils/AuthContext";
 
-import easyFetch from '../../utils/easyFetch';
+import easyFetch from "../../utils/easyFetch";
 // import { PUBLIC } from '../../utils/constants';
 
-import './LoginAndRegister.css';
+import "./LoginAndRegister.css";
 
 const Login = ({ form, setForm }) => {
   return (
     <>
       <h1>login</h1>
-      <div className='input_fields'>
+      <div className="input_fields">
         <label>
           <span>username</span>
           <input
-            type='text'
+            type="text"
             value={form.username}
-            onChange={e => setForm({ ...form, username: e.target.value })}
+            onChange={(e) => setForm({ ...form, username: e.target.value })}
           />
         </label>
         <label>
           <span>password</span>
           <input
-            type='password'
+            type="password"
             value={form.password}
-            onChange={e => setForm({ ...form, password: e.target.value })}
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
           />
         </label>
       </div>
@@ -37,29 +37,29 @@ const Register = ({ form, setForm }) => {
   return (
     <>
       <h1>register</h1>
-      <div className='input_fields'>
+      <div className="input_fields">
         <label>
           <span>username</span>
           <input
-            type='text'
+            type="text"
             value={form.username}
-            onChange={e => setForm({ ...form, username: e.target.value })}
+            onChange={(e) => setForm({ ...form, username: e.target.value })}
           />
         </label>
         <label>
           <span>password</span>
           <input
-            type='password'
+            type="password"
             value={form.password}
-            onChange={e => setForm({ ...form, password: e.target.value })}
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
           />
         </label>
         <label>
           <span>confirm password</span>
           <input
-            type='password'
+            type="password"
             value={form.confirmPassword}
-            onChange={e =>
+            onChange={(e) =>
               setForm({ ...form, confirmPassword: e.target.value })
             }
           />
@@ -75,42 +75,42 @@ const LoginAndRegister = () => {
 
   useEffect(() => {
     if (userData) {
-      history.push('/users');
+      history.push("/users");
     }
   }, [userData, history]);
 
   const [loginOrRegister, setLoginOrRegister] = useState(true);
   const [form, setForm] = useState({
-    username: '',
-    password: '',
-    confirmPassword: '',
+    username: "",
+    password: "",
+    confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
 
   const change = () => {
     setLoginOrRegister(!loginOrRegister);
     setForm({
-      username: '',
-      password: '',
-      confirmPassword: '',
+      username: "",
+      password: "",
+      confirmPassword: "",
     });
   };
 
   return (
-    <div className='login_or_register'>
+    <div className="login_or_register">
       {loginOrRegister ? (
         <Login form={form} setForm={setForm} />
       ) : (
         <Register form={form} setForm={setForm} />
       )}
-      <div className='lor_buttons'>
-        <button className='inv' onClick={change}>
-          {loginOrRegister ? 'register' : 'login'}
+      <div className="lor_buttons">
+        <button className="inv" onClick={change}>
+          {loginOrRegister ? "register" : "login"}
         </button>
         <button
           onClick={async () => {
             const { data, error } = await easyFetch(
-              `auth/${loginOrRegister ? 'login' : 'register'}`,
+              `auth/${loginOrRegister ? "login" : "register"}`,
               form
             );
             if (error) {
@@ -120,11 +120,11 @@ const LoginAndRegister = () => {
               );
             } else {
               await userMutate(data, false);
-              history.push('/');
+              history.push("/");
             }
           }}
         >
-          {loginOrRegister ? 'login' : 'register'}
+          {loginOrRegister ? "login" : "register"}
         </button>
       </div>
       {/* <audio src={`${PUBLIC}/music/backsong.mp3`} loop autoPlay /> */}

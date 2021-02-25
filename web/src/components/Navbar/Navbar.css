@@ -13,6 +13,11 @@ header .header-inner .logo {
   letter-spacing: 2px;
   color: #fff;
 }
+
+header .header-inner .logo a{
+  text-decoration: none;
+  color: white;
+}
 header .header-inner nav ul {
   margin: 0;
   padding: 0;

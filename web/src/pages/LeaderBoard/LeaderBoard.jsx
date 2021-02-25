@@ -4,9 +4,11 @@ import { Canvas } from "react-three-fiber";
 
 import { useGLTF, OrbitControls } from "@react-three/drei";
 
+import { Section } from "../../components/Section";
+
 import Navbar from "../../components/Navbar/Navbar";
 
-import "./Home.css";
+import "./LeaderBoard.css";
 
 const Lights = () => {
   return (
@@ -36,38 +38,57 @@ function Model({ modelPath }) {
   return <primitive object={gltf.scene} dispose={null} />;
 }
 
-const Home = () => {
+const LeaderBoard = () => {
   return (
-    <div className="home-main">
+    <div className="leaderboard-main">
       <Navbar />
       <Canvas
         colorManagement
-        camera={{ position: [0, 0, 40], fov: 70 }}
-        style={{ height: "100vh" }}
+        camera={{ position: [0, 0, 120], fov: 70 }}
+        style={{ height: "50vh" }}
       >
         <Lights />
         <Suspense fallback={null}>
           <group position={[0, 250, 0]}>
             <mesh
-              scale={[1, 1, 1]}
+              scale={[10, 10, 10]}
               onClick={(e) => {
                 e.stopPropagation();
                 console.log("yolo");
               }}
               position={[0, -250, 0]}
             >
-              <Model modelPath="/main_level.gltf" />
+              <Model modelPath="/flower_white.gltf" />
             </mesh>
           </group>
         </Suspense>
         <OrbitControls
           enableZoom={false}
-          mixPolarAngle={Math.PI / 2.1}
-          maxPolarAngle={Math.PI / 2.1}
+          mixPolarAngle={Math.PI / 2}
+          maxPolarAngle={Math.PI / 2}
+        />
+      </Canvas>
+
+      <Canvas
+        colorManagement
+        camera={{ position: [0, 0, 120], fov: 70 }}
+        style={{ height: "50vh" }}
+      >
+        <Lights />
+        <Suspense fallback={null}>
+          <group position={[0, 250, 0]}>
+            <mesh position={[0, -250, 0]} scale={[1, 1, 1]}>
+              <Model modelPath="/armchairYellow.gltf" />
+            </mesh>
+          </group>
+        </Suspense>
+        <OrbitControls
+          enableZoom={false}
+          mixPolarAngle={Math.PI / 2}
+          maxPolarAngle={Math.PI / 2}
         />
       </Canvas>
     </div>
   );
 };
-
-export default Home;
+export default LeaderBoard;
