@@ -40,7 +40,7 @@ function Model({ modelPath }) {
 
 const Home = () => {
   return (
-    <Fragment>
+    <div className="home-main">
       <Navbar />
       <Canvas
         colorManagement
@@ -83,7 +83,7 @@ const Home = () => {
           maxPolarAngle={Math.PI / 2}
         />
       </Canvas>
-    </Fragment>
+    </div>
   );
 };
 
