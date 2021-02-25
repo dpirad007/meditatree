@@ -4,8 +4,6 @@ import { Canvas } from "react-three-fiber";
 
 import { useGLTF, OrbitControls } from "@react-three/drei";
 
-import { Section } from "../../components/Section";
-
 import Navbar from "../../components/Navbar/Navbar";
 
 import "./LeaderBoard.css";
