@@ -46,7 +46,7 @@ const Lights = () => {
 };
 
 function Model() {
-  const gltf = useGLTF("/armchairYellow.gltf");
+  const gltf = useGLTF("/flower_white.gltf");
   return <primitive object={gltf.scene} dispose={null} />;
 }
 
@@ -56,7 +56,7 @@ const HTMLContent = () => {
   return (
     <Section factor={1.5} offset={1}>
       <group position={[0, 250, 0]}>
-        <mesh ref={ref} position={[0, -35, 0]}>
+        <mesh ref={ref} position={[0, -35, 0]} scale={[10,10,10]}>
           <Model />
         </mesh>
         <Html fullscreen>
