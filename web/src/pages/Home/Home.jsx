@@ -1,51 +1,22 @@
-import React, { Fragment, Suspense, useState, useRef, useEffect } from 'react';
+import React, { Fragment, Suspense, useRef, useEffect, useState } from 'react';
 
-import { Canvas, useFrame } from 'react-three-fiber';
-import { useFBX, OrbitControls, Loader, Html } from '@react-three/drei';
+import { Canvas } from 'react-three-fiber';
+import { useFBX, OrbitControls, Loader } from '@react-three/drei';
 
-import { PUBLIC } from '../../utils/constants';
+import { API_URI } from '../../utils/constants';
 
+import useSWR from 'swr';
 import Navbar from '../../components/Navbar/Navbar';
-// import useSWR from "swr";
-// import easyFetch from "../../utils/easyFetch";
+import easyFetch from '../../utils/easyFetch';
 
 import './Home.css';
-
-const Box = props => {
-  const mesh = useRef();
-
-  const [hovered, setHover] = useState(false);
-  const [active, setActive] = useState(false);
-
-  useFrame(() => {
-    mesh.current.rotation.y += 0.005;
-  });
-  return (
-    <mesh
-      {...props}
-      ref={mesh}
-      scale={active ? [1, 1, 1] : [0.5, 0.5, 0.5]}
-      onClick={e => setActive(!active)}
-      onPointerOver={e => setHover(true)}
-      onPointerOut={e => setHover(false)}
-    >
-      <boxBufferGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? '#ffee93' : 'orange'} />
-      <Html>
-        <div className='box-container'>
-          <div className='box-text'>{props.text}</div>
-        </div>
-      </Html>
-    </mesh>
-  );
-};
 
 const Lights = () => {
   return (
     <Fragment>
       <ambientLight intensity={0.3} />
       <directionalLight position={[-10, 10, 0]} intensity={0.1} />
-      <directionalLight castShadow position={[0, 10, 0]} intensity={0.1} />
+      <directionalLight castShadow position={[10, 100, 10]} intensity={0.1} />
       <directionalLight castShadow position={[100, 10, 0]} intensity={0.1} />
     </Fragment>
   );
@@ -56,39 +27,43 @@ function Model({ modelPath }) {
   return <primitive object={fbx} dispose={null} />;
 }
 
+async function logXP(xp) {
+  const { data } = await easyFetch('user/xp', { xp: 10 }, 'PUT');
+  console.log(data);
+  return data;
+}
+
 const Home = () => {
   const audioRef = useRef();
+  const playerRef = useRef();
+
+  const [playing, setPlaying] = useState(false);
+  const { data } = useSWR('user/tutorial');
 
   useEffect(() => {
-    audioRef.current.volume = 0.0;
+    audioRef.current.volume = 0.5;
+    console.log(playerRef.current);
   }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const { data, error } = await easyFetch("user/xp", { xp: 10 }, "PUT");
-  //     console.log(data);
-  //   })();
-  // }, []);
+  function toggleMeditation() {
+    if (!data) return;
+
+    audioRef.current.pause();
+    if (playing) {
+      playerRef.current.pause();
+      setPlaying(false);
+    } else {
+      playerRef.current.play();
+      setPlaying(true);
+    }
+  }
 
   return (
     <div className='home-main'>
       <Navbar />
-      {/* <Canvas
-        colorManagement
-        camera={{ position: [3, 3, 3], fov: 65 }}
-        style={{ height: '10vh' }}
-      >
-        <ambientLight intensity={0.5} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-        <pointLight position={[-10, -10, -10]} />
-        <Box position={[-3, 0, 1]} text='Guided' />
-        <Box position={[3, 0, 1]} text='Unguided' />
-
-        <OrbitControls minAzimuthAngle={0} maxAzimuthAngle={0} />
-      </Canvas> */}
       <Canvas
         colorManagement
-        camera={{ position: [3, 1, 0], fov: 65 }}
+        camera={{ position: [0, 1, 3], fov: 60 }}
         style={{ height: '100vh' }}
       >
         <Lights />
@@ -98,7 +73,7 @@ const Home = () => {
               scale={[0.002, 0.002, 0.002]}
               onClick={e => {
                 e.stopPropagation();
-                console.log('play audio');
+                toggleMeditation();
               }}
               position={[0, 0, 0]}
             >
@@ -127,12 +102,8 @@ const Home = () => {
         />
       </Canvas>
       <Loader />
-      <audio
-        ref={audioRef}
-        src={`${PUBLIC}/music/backsong.mp3`}
-        loop
-        autoPlay
-      />
+      <audio ref={audioRef} src='/music/backsong.mp3' loop autoPlay />
+      <audio ref={playerRef} src={`${API_URI}assets/audio/${data?.data}.mp3`} />
     </div>
   );
 };

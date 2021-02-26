@@ -51,6 +51,8 @@ app.use(
 
 require('./models/user.js');
 
+app.use('/assets', express.static('assets'));
+
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 

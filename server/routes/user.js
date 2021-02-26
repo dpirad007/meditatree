@@ -3,8 +3,6 @@ const isAuth = require('../middleware/isAuth');
 const router = express.Router();
 
 const User = require('../models/user');
-const Group = require('../models/group');
-const { populate } = require('../models/user');
 
 router.use(isAuth);
 
@@ -75,6 +73,17 @@ router.get('/leaderboard', async (req, res) => {
   } catch (error) {
     res.send({ data: null, error: 'something went wrong' });
     console.error(error);
+  }
+});
+
+router.get('/tutorial', async (req, res) => {
+  try {
+    const username = req.session.username;
+    const user = await User.findOne({ username });
+    res.send({ data: user.next_tutorial, error: null });
+  } catch (error) {
+    res.send({ data: null, error: 'something went wrong' });
+    console.log(error);
   }
 });
 
