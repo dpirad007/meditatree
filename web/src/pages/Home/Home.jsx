@@ -1,7 +1,9 @@
-import React, { Fragment, Suspense, useState, useRef } from "react";
+import React, { Fragment, Suspense, useState, useRef, useEffect } from "react";
 
 import { Canvas, useFrame } from "react-three-fiber";
 import { useFBX, OrbitControls, Loader, Html } from "@react-three/drei";
+
+import { PUBLIC } from "../../utils/constants";
 
 import Navbar from "../../components/Navbar/Navbar";
 // import useSWR from 'swr';
@@ -9,13 +11,12 @@ import Navbar from "../../components/Navbar/Navbar";
 
 import "./Home.css";
 
-function Box(props) {
-  // This reference will give us direct access to the mesh
+const Box = (props) => {
   const mesh = useRef();
-  // Set up state for the hovered and active state
+
   const [hovered, setHover] = useState(false);
   const [active, setActive] = useState(false);
-  // Rotate mesh every frame, this is outside of React without overhead
+
   useFrame(() => {
     mesh.current.rotation.y += 0.005;
   });
@@ -37,7 +38,7 @@ function Box(props) {
       </Html>
     </mesh>
   );
-}
+};
 
 const Lights = () => {
   return (
@@ -56,6 +57,11 @@ function Model({ modelPath }) {
 }
 
 const Home = () => {
+  const audioRef = useRef();
+
+  useEffect(() => {
+    audioRef.current.volume = 0.0;
+  }, []);
   // const { data, error } = useSWR('user/leaderboard');
   // console.log(data);
   // const { data, error } = useSWR('user/streak');
@@ -110,6 +116,12 @@ const Home = () => {
         />
       </Canvas>
       <Loader />
+      <audio
+        ref={audioRef}
+        src={`${PUBLIC}/music/backsong.mp3`}
+        loop
+        autoPlay
+      />
     </div>
   );
 };

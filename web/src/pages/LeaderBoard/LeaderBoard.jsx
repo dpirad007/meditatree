@@ -1,6 +1,6 @@
-import React, { Fragment, Suspense, useRef, useState } from "react";
+import React, { Fragment, Suspense } from "react";
 
-import { Canvas, useFrame } from "react-three-fiber";
+import { Canvas } from "react-three-fiber";
 
 import { OrbitControls, Loader, useGLTF } from "@react-three/drei";
 
@@ -8,30 +8,6 @@ import ProgressBar from "../../components/ProgressBar/ProgressBar.";
 import Navbar from "../../components/Navbar/Navbar";
 
 import "./LeaderBoard.css";
-
-const Box = (props) => {
-  const mesh = useRef();
-
-  const [hovered, setHover] = useState(false);
-  const [active, setActive] = useState(false);
-
-  useFrame(() => {
-    mesh.current.rotation.x = mesh.current.rotation.y += 0.01;
-  });
-  return (
-    <mesh
-      {...props}
-      ref={mesh}
-      scale={active ? [1.5, 1.5, 1.5] : [1, 1, 1]}
-      onClick={(e) => setActive(!active)}
-      onPointerOver={(e) => setHover(true)}
-      onPointerOut={(e) => setHover(false)}
-    >
-      <boxBufferGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
-    </mesh>
-  );
-};
 
 const Lights = () => {
   return (
@@ -70,7 +46,7 @@ const LeaderBoard = () => {
           className="lb-can1"
           colorManagement
           camera={{ position: [0, 0, 120], fov: 70 }}
-          style={{ height: "50vh" }}
+          style={{ height: "45vh" }}
         >
           <Lights />
           <Suspense fallback={null}>
