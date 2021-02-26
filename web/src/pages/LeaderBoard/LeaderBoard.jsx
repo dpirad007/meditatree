@@ -4,7 +4,7 @@ import { Canvas, useFrame } from "react-three-fiber";
 
 import { OrbitControls, Loader, useFBX, Html } from "@react-three/drei";
 
-import ProgressBar from "../../components/ProgressBar/ProgressBar.";
+import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import Navbar from "../../components/Navbar/Navbar";
 
 import useSWR from "swr";
@@ -54,8 +54,6 @@ function Model({ modelPath }) {
 const LeaderBoard = () => {
   const { data } = useSWR("user/leaderboard");
   console.log(data);
-
-  const { data: sData } = useSWR("user/streak");
 
   return (
     <div className="lb-main">

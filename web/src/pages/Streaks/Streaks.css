@@ -1,4 +1,31 @@
 .streaks-main{
     background: #344fe6;
-    height: 100vh;
+
 }
+
+.sb-streaks-main{
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr;
+    grid-template-areas: "s-canv s-text";
+    grid-template-rows: 1fr;
+    height: 100vh;
+  }
+  
+  .ss-canv{
+    grid-area: s-canv;
+    font-size: xx-large;
+    font-weight: 500;
+    color: white;
+    justify-self: center;
+    margin-top: 10rem;
+  }
+  
+  .ss-text-main{
+      justify-self: center;
+margin-top: 10rem;
+    grid-area: s-text;
+    font-size: xx-large;
+    font-weight: 500;
+    color: white;
+  }
+  
