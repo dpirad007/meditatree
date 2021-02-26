@@ -28,7 +28,7 @@ function Model({ modelPath }) {
 }
 
 async function logXP(xp) {
-  const { data } = await easyFetch('user/xp', { xp: 10 }, 'PUT');
+  const { data } = await easyFetch('user/xp', { xp }, 'PUT');
   return data;
 }
 

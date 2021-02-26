@@ -22,6 +22,18 @@ router.get('/streak', async (req, res) => {
 router.put('/xp', async (req, res) => {
   try {
     const username = req.session.username;
+    const user = await User.findOne({ username });
+
+    res.send({ data: user.xp, error: null });
+  } catch (error) {
+    res.send({ data: null, error: 'something went wrong' });
+    console.error(error);
+  }
+});
+
+router.put('/xp', async (req, res) => {
+  try {
+    const username = req.session.username;
     const xp = req.body.xp;
     const user = await User.findOne({ username });
 
