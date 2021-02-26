@@ -6,8 +6,8 @@ import { useFBX, OrbitControls, Loader, Html } from "@react-three/drei";
 import { PUBLIC } from "../../utils/constants";
 
 import Navbar from "../../components/Navbar/Navbar";
-// import useSWR from 'swr';
-// import easyFetch from '../../utils/easyFetch';
+// import useSWR from "swr";
+// import easyFetch from "../../utils/easyFetch";
 
 import "./Home.css";
 
@@ -62,13 +62,13 @@ const Home = () => {
   useEffect(() => {
     audioRef.current.volume = 0.0;
   }, []);
-  // const { data, error } = useSWR('user/leaderboard');
+  // const { data, error } = useSWR("user/leaderboard");
   // console.log(data);
   // const { data, error } = useSWR('user/streak');
   // console.log(data);
   // useEffect(() => {
   //   (async () => {
-  //     const { data, error } = await easyFetch('user/xp', { xp: 10 }, 'PUT');
+  //     const { data, error } = await easyFetch("user/xp", { xp: 10 }, "PUT");
   //     console.log(data);
   //   })();
   // }, []);

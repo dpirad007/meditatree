@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense } from "react";
+import React, { Fragment, Suspense, useEffect, useState } from "react";
 
 import { Canvas } from "react-three-fiber";
 
@@ -6,6 +6,9 @@ import { OrbitControls, Loader, useGLTF } from "@react-three/drei";
 
 import ProgressBar from "../../components/ProgressBar/ProgressBar.";
 import Navbar from "../../components/Navbar/Navbar";
+
+import useSWR from "swr";
+import easyFetch from "../../utils/easyFetch";
 
 import "./LeaderBoard.css";
 
@@ -38,6 +41,16 @@ function Model({ modelPath }) {
 }
 
 const LeaderBoard = () => {
+  const { data, error } = useSWR("user/leaderboard");
+
+  const { data: sData, error: sError } = useSWR("user/streak");
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const { data, error } = await easyFetch("user/xp", { xp: 10 }, "PUT");
+  //     console.log(data);
+  //   })();
+  // }, []);
   return (
     <div className="lb-main">
       <Navbar />
@@ -72,13 +85,19 @@ const LeaderBoard = () => {
         <div className="lb-board">
           <div className="lb-title">Top Weekly</div>
           <div className="lb-item-list">
-            <div className="lb-item">
-              <div className="lb-li-name">User1</div>
-              <div className="lb-li-score">
-                <ProgressBar value={50} total={100} />
-              </div>
-              <div className="lb-li-value">80</div>
-            </div>
+            {data && data.data && data.data.length
+              ? data.data.map((obj, i) =>
+                  i < 4 ? (
+                    <div className="lb-item" key={i}>
+                      <div className="lb-li-name">User1</div>
+                      <div className="lb-li-score">
+                        <ProgressBar value={obj.xp} total={100} />
+                      </div>
+                      <div className="lb-li-value">{obj.xp}</div>
+                    </div>
+                  ) : null
+                )
+              : null}
           </div>
         </div>
       </div>
@@ -106,9 +125,19 @@ const LeaderBoard = () => {
         </Canvas>
 
         <div className="s-text-main">
-          Streak
-          <br />
-          10 Days
+          {sData && sData.data ? (
+            <Fragment>
+              Streak
+              <br />
+              {sData.data} Days
+            </Fragment>
+          ) : (
+            <Fragment>
+              Streak
+              <br />
+              10 Days
+            </Fragment>
+          )}
         </div>
       </div>
       <Loader />
