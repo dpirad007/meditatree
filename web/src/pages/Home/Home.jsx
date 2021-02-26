@@ -6,7 +6,7 @@ import { useFBX, OrbitControls, Loader, Html } from "@react-three/drei";
 import { PUBLIC } from "../../utils/constants";
 
 import Navbar from "../../components/Navbar/Navbar";
-
+// import useSWR from "swr";
 // import easyFetch from "../../utils/easyFetch";
 
 import "./Home.css";
@@ -24,7 +24,7 @@ const Box = (props) => {
     <mesh
       {...props}
       ref={mesh}
-      scale={active ? [2.3, 2.3, 2.3] : [2, 2, 2]}
+      scale={active ? [1, 1, 1] : [0.5, 0.5, 0.5]}
       onClick={(e) => setActive(!active)}
       onPointerOver={(e) => setHover(true)}
       onPointerOut={(e) => setHover(false)}
@@ -73,43 +73,47 @@ const Home = () => {
   return (
     <div className="home-main">
       <Navbar />
-      <Canvas
+      {/* <Canvas
         colorManagement
         camera={{ position: [3, 3, 3], fov: 65 }}
-        style={{ height: "10vh" }}
+        style={{ height: '10vh' }}
       >
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
-        <Box position={[-3, 0, 1]} text="Guided" />
-        <Box position={[3, 0, 1]} text="Unguided" />
+        <Box position={[-3, 0, 1]} text='Guided' />
+        <Box position={[3, 0, 1]} text='Unguided' />
 
         <OrbitControls minAzimuthAngle={0} maxAzimuthAngle={0} />
-      </Canvas>
+      </Canvas> */}
       <Canvas
         colorManagement
-        camera={{ position: [3, 3, 3], fov: 65 }}
+        camera={{ position: [3, 0, 0], fov: 65 }}
         style={{ height: "90vh" }}
       >
         <Lights />
         <Suspense fallback={null}>
-          <group position={[0, 250, 0]}>
+          <Box position={[1, 0.25, 1]} text="Guided" />
+          <Box position={[-1, 0.25, 1]} text="Unguided" />
+          <group position={[0, 0, 0]}>
             <mesh
               scale={[0.001, 0.001, 0.001]}
               onClick={(e) => {
                 e.stopPropagation();
-                console.log("yolo");
               }}
-              position={[0, -250, 0]}
+              position={[0, 0, 0]}
             >
               <Model modelPath="/main_level.fbx" />
             </mesh>
           </group>
         </Suspense>
         <OrbitControls
+          enableDamping={true}
           enableZoom={false}
           minPolarAngle={Math.PI / 2.5}
           maxPolarAngle={Math.PI / 2.1}
+          minAzimuthAngle={(-1 * Math.PI) / 4}
+          maxAzimuthAngle={Math.PI / 4}
         />
       </Canvas>
       <Loader />
