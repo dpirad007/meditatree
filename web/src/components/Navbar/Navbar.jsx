@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
+import easyFetch from '../../utils/easyFetch';
 
 import './Navbar.css';
 
@@ -23,7 +24,19 @@ export default function Header() {
                 </li>
               ))}
             <li>
-              <a href='/'>Log Out</a>
+              <button
+                style={{
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  color: 'white',
+                }}
+                onClick={async () => {
+                  await easyFetch('auth/logout', {}, 'POST');
+                  window.location = '/login';
+                }}
+              >
+                Log Out
+              </button>
             </li>
           </ul>
         </nav>

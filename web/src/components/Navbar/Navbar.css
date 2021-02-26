@@ -26,6 +26,7 @@ header .header-inner nav ul {
 header .header-inner nav ul li {
   list-style: none;
   margin: 0 1rem;
+  font-weight: bold;
 }
 header .header-inner nav ul li.btn a {
   color: #fff;

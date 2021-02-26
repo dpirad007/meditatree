@@ -3,6 +3,7 @@ const isAuth = require('../middleware/isAuth');
 const router = express.Router();
 
 const User = require('../models/user');
+require('../models/group');
 
 router.use(isAuth);
 
