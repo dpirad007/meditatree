@@ -91,13 +91,23 @@ const Home = () => {
       </Canvas> */}
       <Canvas
         colorManagement
-        camera={{ position: [3, 0, 0], fov: 65 }}
-        style={{ height: '90vh' }}
+        camera={{ position: [3, 1, 0], fov: 65 }}
+        style={{ height: '100vh' }}
       >
         <Lights />
         <Suspense fallback={null}>
-          <Box position={[1, 0.25, 1]} text='Guided' />
-          <Box position={[-1, 0.25, 1]} text='Unguided' />
+          <group position={[0, 0, 1]} rotation={[0, (-1 * Math.PI) / 2, 0]}>
+            <mesh
+              scale={[0.002, 0.002, 0.002]}
+              onClick={e => {
+                e.stopPropagation();
+                console.log('play audio');
+              }}
+              position={[0, 0, 0]}
+            >
+              <Model modelPath='/models/sunflower.fbx' />
+            </mesh>
+          </group>
           <group position={[0, 0, 0]}>
             <mesh
               scale={[0.001, 0.001, 0.001]}
@@ -106,7 +116,7 @@ const Home = () => {
               }}
               position={[0, 0, 0]}
             >
-              <Model modelPath='/main_level.fbx' />
+              <Model modelPath='/models/forest.fbx' />
             </mesh>
           </group>
         </Suspense>
