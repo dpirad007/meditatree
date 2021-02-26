@@ -45,14 +45,14 @@ const LeaderBoard = () => {
         <Canvas
           className="lb-can1"
           colorManagement
-          camera={{ position: [0, 0, 120], fov: 70 }}
+          camera={{ position: [3, 3, 3], fov: 65 }}
           style={{ height: "45vh" }}
         >
           <Lights />
           <Suspense fallback={null}>
             <group position={[0, 250, 0]}>
               <mesh
-                scale={[10, 10, 10]}
+                scale={[1, 1, 1]}
                 onClick={(e) => {
                   e.stopPropagation();
                   console.log("yolo");
@@ -82,25 +82,35 @@ const LeaderBoard = () => {
           </div>
         </div>
       </div>
-      <Canvas
-        colorManagement
-        camera={{ position: [0, 0, 120], fov: 70 }}
-        style={{ height: "50vh" }}
-      >
-        <Lights />
-        <Suspense fallback={null}>
-          <group position={[0, 250, 0]}>
-            <mesh position={[0, -250, 0]} scale={[1, 1, 1]}>
-              <Model modelPath="/armchairYellow.gltf" />
-            </mesh>
-          </group>
-        </Suspense>
-        <OrbitControls
-          enableZoom={false}
-          mixPolarAngle={Math.PI / 2}
-          maxPolarAngle={Math.PI / 2}
-        />
-      </Canvas>
+
+      <div className="lb-streaks-main">
+        <Canvas
+          className="s-canv"
+          colorManagement
+          camera={{ position: [3, 6, 3], fov: 65 }}
+          style={{ height: "45vh" }}
+        >
+          <Lights />
+          <Suspense fallback={null}>
+            <group position={[0, 250, 0]}>
+              <mesh position={[0, -250, 0]} scale={[0.05, 0.05, 0.05]}>
+                <Model modelPath="/armchairYellow.gltf" />
+              </mesh>
+            </group>
+          </Suspense>
+          <OrbitControls
+            enableZoom={false}
+            mixPolarAngle={Math.PI / 2}
+            maxPolarAngle={Math.PI / 2}
+          />
+        </Canvas>
+
+        <div className="s-text-main">
+          10
+          <br />
+          Days
+        </div>
+      </div>
       <Loader />
     </div>
   );

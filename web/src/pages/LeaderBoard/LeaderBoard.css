@@ -90,6 +90,26 @@
 }
 
 
+.lb-streaks-main{
+  background: rgb(247, 176, 22);
+  display: grid;
+  grid-template-columns: 0.6fr 0.3fr;
+  grid-template-areas: "s-canv s-text";
+  grid-template-rows: 1fr;
+}
+
+.s-canv{
+  grid-area: s-canv;
+}
+
+.s-text-main{
+ margin-top: 4rem;
+  grid-area: s-text;
+  font-size: xx-large;
+  font-weight: 500;
+  color: white;
+}
+
 
 @media only screen and (max-width: 600px){
   .leaderboard-main{
