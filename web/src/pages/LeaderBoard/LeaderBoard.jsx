@@ -2,7 +2,7 @@ import React, { Fragment, Suspense } from "react";
 
 import { Canvas } from "react-three-fiber";
 
-import { OrbitControls, Loader, useGLTF } from "@react-three/drei";
+import { OrbitControls, Loader, useFBX } from "@react-three/drei";
 
 import ProgressBar from "../../components/ProgressBar/ProgressBar.";
 import Navbar from "../../components/Navbar/Navbar";
@@ -16,27 +16,13 @@ const Lights = () => {
     <Fragment>
       <ambientLight intensity={0.3} />
       <directionalLight position={[10, 10, 5]} intensity={1} />
-      <directionalLight
-        castShadow
-        position={[0, 10, 0]}
-        intensity={1}
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
-        shadow-camera-far={50}
-        shadow-camera-left={-10}
-        shadow-camera-right={10}
-        shadow-camera-top={10}
-        shadow-camera-bottom={-10}
-      />
-      {/* Spotlight Large overhead light */}
-      <spotLight intensity={1} position={[1000, 0, 0]} castShadow />
     </Fragment>
   );
 };
 
 function Model({ modelPath }) {
-  const gltf = useGLTF(modelPath);
-  return <primitive object={gltf.scene} dispose={null} />;
+  const fbx = useFBX(modelPath);
+  return <primitive object={fbx} dispose={null} />;
 }
 
 const LeaderBoard = () => {
@@ -58,21 +44,21 @@ const LeaderBoard = () => {
           <Suspense fallback={null}>
             <group position={[0, 250, 0]}>
               <mesh
-                scale={[1, 1, 1]}
+                scale={[0.0004, 0.0004, 0.0004]}
                 onClick={(e) => {
                   e.stopPropagation();
-                  console.log("yolo");
+                  console.log("test");
                 }}
                 position={[0, -250, 0]}
               >
-                <Model modelPath="/flower_white.gltf" />
+                <Model modelPath="/mountain.fbx" />
               </mesh>
             </group>
           </Suspense>
           <OrbitControls
             enableZoom={false}
-            mixPolarAngle={Math.PI / 2}
-            maxPolarAngle={Math.PI / 2}
+            mixPolarAngle={Math.PI / 2.1}
+            maxPolarAngle={Math.PI / 2.1}
           />
         </Canvas>
         <div className="lb-board">
@@ -105,8 +91,8 @@ const LeaderBoard = () => {
           <Lights />
           <Suspense fallback={null}>
             <group position={[0, 250, 0]}>
-              <mesh position={[0, -250, 0]} scale={[0.05, 0.05, 0.05]}>
-                <Model modelPath="/armchairYellow.gltf" />
+              <mesh position={[0, -250, 0]} scale={[0.005, 0.005, 0.005]}>
+                <Model modelPath="/sunflower.fbx" />
               </mesh>
             </group>
           </Suspense>

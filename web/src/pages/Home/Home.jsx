@@ -62,10 +62,7 @@ const Home = () => {
   useEffect(() => {
     audioRef.current.volume = 0.0;
   }, []);
-  // const { data, error } = useSWR("user/leaderboard");
-  // console.log(data);
-  // const { data, error } = useSWR('user/streak');
-  // console.log(data);
+
   // useEffect(() => {
   //   (async () => {
   //     const { data, error } = await easyFetch("user/xp", { xp: 10 }, "PUT");

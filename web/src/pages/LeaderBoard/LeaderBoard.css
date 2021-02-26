@@ -12,13 +12,13 @@
   
   .leaderboard-main{
     display: grid;
-    grid-template-columns: 0.5fr 0.5fr;
+    grid-template-columns: 0.6fr 0.4fr;
     grid-template-rows: 1fr;
     grid-template-areas: "can1 lb-board";
   }
 
   .lb-board{
-    width: 60%;
+    width: 80%;
     height: 80%;
     background-color: white;
     margin: 1rem;
@@ -83,6 +83,7 @@
 
   .lb-can1{
     grid-area: can1;
+    justify-self: center;
   }
 
 .lb-main{
