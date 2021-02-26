@@ -76,7 +76,7 @@ const Home = () => {
   return (
     <div className='home-main'>
       <Navbar />
-      <Canvas
+      {/* <Canvas
         colorManagement
         camera={{ position: [3, 3, 3], fov: 65 }}
         style={{ height: '10vh' }}
@@ -88,16 +88,16 @@ const Home = () => {
         <Box position={[3, 0, 1]} text='Unguided' />
 
         <OrbitControls minAzimuthAngle={0} maxAzimuthAngle={0} />
-      </Canvas>
+      </Canvas> */}
       <Canvas
         colorManagement
-        camera={{ position: [3, 3, 3], fov: 65 }}
+        camera={{ position: [3, 0, 0], fov: 65 }}
         style={{ height: '90vh' }}
       >
         <Lights />
         <Suspense fallback={null}>
-          {/* <Box position={[1, 0.5, 1]} text='Guided' />
-          <Box position={[-1, 0.5, 1]} text='Unguided' /> */}
+          <Box position={[1, 0.25, 1]} text='Guided' />
+          <Box position={[-1, 0.25, 1]} text='Unguided' />
           <group position={[0, 0, 0]}>
             <mesh
               scale={[0.001, 0.001, 0.001]}
@@ -115,8 +115,8 @@ const Home = () => {
           enableZoom={false}
           minPolarAngle={Math.PI / 2.5}
           maxPolarAngle={Math.PI / 2.1}
-          minAzimuthAngle={(-1 * Math.PI) / 2}
-          maxAzimuthAngle={Math.PI / 2}
+          minAzimuthAngle={(-1 * Math.PI) / 4}
+          maxAzimuthAngle={Math.PI / 4}
         />
       </Canvas>
       <Loader />
