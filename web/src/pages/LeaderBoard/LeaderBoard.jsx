@@ -12,10 +12,10 @@ import useSWR from "swr";
 import "./LeaderBoard.css";
 
 const boxPositions = {
-  0: [0.5, 2, 2],
-  1: [-0.7, 1.8, 2],
-  2: [-0.2, 1.4, 1],
-  3: [0.1, 1.2, 3.1],
+  0: [0.5, 2, 0],
+  1: [-0.7, 1.8, 0],
+  2: [-0.2, 1.4, -1],
+  3: [0.1, 1.2, 1.1],
 };
 
 const Box = (props) => {
@@ -74,7 +74,7 @@ const LeaderBoard = () => {
                 <group position={[0, 0, 2]}>
                   <mesh
                     scale={[0.0009, 0.0009, 0.0009]}
-                    position={[0, 2.45, 0]}
+                    position={[0, 2.45, -2]}
                   >
                     <Model modelPath="/sunflower.fbx" />
                     <Html>
@@ -92,7 +92,7 @@ const LeaderBoard = () => {
                   ) : null
                 )}
 
-                <group position={[0, 0, 2]}>
+                <group position={[0, 0, 0]}>
                   <mesh scale={[0.0004, 0.0004, 0.0004]} position={[0, 0, 0]}>
                     <Model modelPath="/mountain.fbx" />
                   </mesh>
