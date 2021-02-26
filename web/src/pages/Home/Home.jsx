@@ -45,8 +45,6 @@ const Home = () => {
     audioRef.current.volume = 0.5;
   }, []);
 
-  useEffect(() => console.log(seconds), [seconds]);
-
   function toggleMeditation() {
     if (!data) return;
 
