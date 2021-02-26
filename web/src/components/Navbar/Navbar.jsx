@@ -16,7 +16,7 @@ export default function Header() {
         </div>
         <nav>
           <ul>
-            {['/', '/leaderboard']
+            {['/', '/leaderboard', '/streaks']
               .filter(p => p !== location.pathname)
               .map(p => (
                 <li key={p}>

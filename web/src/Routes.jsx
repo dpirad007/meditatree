@@ -4,6 +4,7 @@ import AuthRoute from './components/AuthRoute';
 import LoginAndRegister from './pages/LoginAndRegister/LoginAndRegister';
 import Home from './pages/Home/Home';
 import LeaderBoard from './pages/LeaderBoard/LeaderBoard';
+import Streak from './pages/Streak/Streak';
 
 const Routes = () => (
   <Switch>
@@ -12,6 +13,7 @@ const Routes = () => (
     </Route>
     <AuthRoute exact path='/' component={Home} />
     <AuthRoute exact path='/leaderboard' component={LeaderBoard} />
+    <AuthRoute exact path='/streaks' component={Streaks} />
   </Switch>
 );
 
