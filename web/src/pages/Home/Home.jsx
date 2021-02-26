@@ -11,10 +11,10 @@ import easyFetch from '../../utils/easyFetch';
 
 import './Home.css';
 
-const Lights = () => {
+const Lights = ({ low }) => {
   return (
     <Fragment>
-      <ambientLight intensity={0.3} />
+      <ambientLight intensity={low ? 0.1 : 0.3} />
       <directionalLight position={[-10, 10, 0]} intensity={0.1} />
       <directionalLight castShadow position={[10, 100, 10]} intensity={0.1} />
       <directionalLight castShadow position={[100, 10, 0]} intensity={0.1} />
@@ -42,31 +42,37 @@ const Home = () => {
 
   useEffect(() => {
     audioRef.current.volume = 0.5;
-    console.log(playerRef.current);
   }, []);
 
   function toggleMeditation() {
     if (!data) return;
 
-    audioRef.current.pause();
     if (playing) {
       playerRef.current.pause();
+      audioRef.current.play();
       setPlaying(false);
     } else {
+      audioRef.current.pause();
+      playerRef.current.currentTime = 0;
       playerRef.current.play();
       setPlaying(true);
     }
   }
 
   return (
-    <div className='home-main'>
+    <div
+      className='home-main'
+      style={{
+        background: !playing ? '#51f8ce' : '#5191f8',
+      }}
+    >
       <Navbar />
       <Canvas
         colorManagement
         camera={{ position: [0, 1, 3], fov: 60 }}
         style={{ height: '100vh' }}
       >
-        <Lights />
+        <Lights low={playing} />
         <Suspense fallback={null}>
           <group position={[0, 0, 1]} rotation={[0, (-1 * Math.PI) / 2, 0]}>
             <mesh
