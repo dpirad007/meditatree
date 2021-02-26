@@ -110,7 +110,7 @@ const LeaderBoard = () => {
           <div className="lb-item-list">
             {data && data.data && data.data.length
               ? data.data.map((obj, i) =>
-                  i < 4 ? (
+                  i <= 4 ? (
                     <div className="lb-item" key={i}>
                       <div className="lb-li-name">{obj.username}</div>
                       <div className="lb-li-score">
