@@ -4,7 +4,7 @@ import AuthRoute from './components/AuthRoute';
 import LoginAndRegister from './pages/LoginAndRegister/LoginAndRegister';
 import Home from './pages/Home/Home';
 import LeaderBoard from './pages/LeaderBoard/LeaderBoard';
-import Streak from './pages/Streak/Streak';
+import Streaks from './pages/Streaks/Streaks';
 
 const Routes = () => (
   <Switch>
