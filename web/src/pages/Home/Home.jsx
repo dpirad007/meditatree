@@ -29,7 +29,6 @@ function Model({ modelPath }) {
 
 async function logXP(xp) {
   const { data } = await easyFetch('user/xp', { xp: 10 }, 'PUT');
-  console.log(data);
   return data;
 }
 
@@ -38,23 +37,32 @@ const Home = () => {
   const playerRef = useRef();
 
   const [playing, setPlaying] = useState(false);
+  const [seconds, setSeconds] = useState(0);
+  const [ourInterval, setOurInterval] = useState(null);
   const { data } = useSWR('user/tutorial');
 
   useEffect(() => {
     audioRef.current.volume = 0.5;
   }, []);
 
+  useEffect(() => console.log(seconds), [seconds]);
+
   function toggleMeditation() {
     if (!data) return;
 
     if (playing) {
       playerRef.current.pause();
+      clearInterval(ourInterval);
+      setInterval(null);
+      logXP(seconds);
+      setSeconds(0);
       audioRef.current.play();
       setPlaying(false);
     } else {
       audioRef.current.pause();
       playerRef.current.currentTime = 0;
       playerRef.current.play();
+      setOurInterval(setInterval(() => setSeconds(s => s + 1), 1000));
       setPlaying(true);
     }
   }
