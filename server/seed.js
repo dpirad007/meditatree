@@ -24,6 +24,7 @@ const addUsers = async () => {
         username,
         password: await argon2.hash(username),
         division: Math.floor(i / 30) + 1,
+        xp: Math.floor(Math.random() * 100),
       });
       users.push(user);
     }
