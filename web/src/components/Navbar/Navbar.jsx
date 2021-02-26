@@ -20,7 +20,7 @@ export default function Header() {
               .filter(p => p !== location.pathname)
               .map(p => (
                 <li key={p}>
-                  <Link to={p}>{p === '/' ? 'Home' : 'Leaderboard'}</Link>
+                  <Link to={p}>{p === '/' ? 'home' : p.slice(1)}</Link>
                 </li>
               ))}
             <li>
