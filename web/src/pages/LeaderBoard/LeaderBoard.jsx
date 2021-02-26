@@ -106,9 +106,9 @@ const LeaderBoard = () => {
         </Canvas>
 
         <div className="s-text-main">
-          10
+          Streak
           <br />
-          Days
+          10 Days
         </div>
       </div>
       <Loader />
