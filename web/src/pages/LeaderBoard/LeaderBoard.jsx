@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense, useEffect, useState } from "react";
+import React, { Fragment, Suspense } from "react";
 
 import { Canvas } from "react-three-fiber";
 
@@ -8,7 +8,6 @@ import ProgressBar from "../../components/ProgressBar/ProgressBar.";
 import Navbar from "../../components/Navbar/Navbar";
 
 import useSWR from "swr";
-import easyFetch from "../../utils/easyFetch";
 
 import "./LeaderBoard.css";
 
@@ -41,16 +40,10 @@ function Model({ modelPath }) {
 }
 
 const LeaderBoard = () => {
-  const { data, error } = useSWR("user/leaderboard");
+  const { data } = useSWR("user/leaderboard");
 
-  const { data: sData, error: sError } = useSWR("user/streak");
+  const { data: sData } = useSWR("user/streak");
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const { data, error } = await easyFetch("user/xp", { xp: 10 }, "PUT");
-  //     console.log(data);
-  //   })();
-  // }, []);
   return (
     <div className="lb-main">
       <Navbar />
