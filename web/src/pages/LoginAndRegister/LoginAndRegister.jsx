@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import LoginBackground from "../../components/LoginBackground";
 import { useAuth } from "../../utils/AuthContext";
@@ -10,7 +10,7 @@ import "./LoginAndRegister.css";
 
 const Login = ({ form, setForm }) => {
   return (
-    <>
+    <Fragment>
       <h1>login</h1>
       <div className="input_fields">
         <label>
@@ -30,13 +30,13 @@ const Login = ({ form, setForm }) => {
           />
         </label>
       </div>
-    </>
+    </Fragment>
   );
 };
 
 const Register = ({ form, setForm }) => {
   return (
-    <>
+    <Fragment>
       <h1>register</h1>
       <div className="input_fields">
         <label>
@@ -66,7 +66,7 @@ const Register = ({ form, setForm }) => {
           />
         </label>
       </div>
-    </>
+    </Fragment>
   );
 };
 const LoginAndRegister = () => {
@@ -103,7 +103,7 @@ const LoginAndRegister = () => {
   };
 
   return (
-    <>
+    <Fragment>
       <LoginBackground />
       <div className="login_or_register">
         {loginOrRegister ? (
@@ -142,7 +142,7 @@ const LoginAndRegister = () => {
           autoPlay
         />
       </div>
-    </>
+    </Fragment>
   );
 };
 
