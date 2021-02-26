@@ -81,13 +81,7 @@ const Home = () => {
             </mesh>
           </group>
           <group position={[0, 0, 0]}>
-            <mesh
-              scale={[0.001, 0.001, 0.001]}
-              onClick={e => {
-                e.stopPropagation();
-              }}
-              position={[0, 0, 0]}
-            >
+            <mesh scale={[0.001, 0.001, 0.001]} position={[0, 0, 0]}>
               <Model modelPath='/models/forest.fbx' />
             </mesh>
           </group>
