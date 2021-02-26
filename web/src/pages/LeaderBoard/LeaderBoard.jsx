@@ -116,7 +116,7 @@ const LeaderBoard = () => {
                       <div className="lb-li-score">
                         <ProgressBar value={obj.xp} total={100} />
                       </div>
-                      <div className="lb-li-value">{obj.xp}</div>
+                      <div className="lb-li-value">{obj.xp} xp</div>
                     </div>
                   ) : null
                 )
