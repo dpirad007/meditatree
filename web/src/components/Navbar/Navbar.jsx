@@ -29,6 +29,7 @@ export default function Header() {
                   backgroundColor: 'transparent',
                   border: 'none',
                   color: 'white',
+                  cursor: 'pointer',
                 }}
                 onClick={async () => {
                   await easyFetch('auth/logout', {}, 'POST');
