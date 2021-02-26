@@ -19,7 +19,7 @@ router.get('/streak', async (req, res) => {
   }
 });
 
-router.put('/xp', async (req, res) => {
+router.get('/xp', async (req, res) => {
   try {
     const username = req.session.username;
     const user = await User.findOne({ username });
